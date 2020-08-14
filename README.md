@@ -7,4 +7,6 @@ Json
 Tomcat/ any server
 Junit
 
+Sprint Tool Suite / eclipse/ InteliJ
+
 This Project alows User to search the catalog with the keyword they would like to see the project.
