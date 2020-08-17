@@ -40,28 +40,57 @@ public class SearchController {
     	{
     		return new ResponseEntity<>("please enter the keyword",HttpStatus.BAD_REQUEST);
     	}
-    	else if(keyword!=null){
     		
-    		return new ResponseEntity<>("ok",HttpStatus.OK);
     		
-    	}
     	
     	
-    	if(pageSize==null) {
+    	
+    	if(pageSize==null || pageSize.isEmpty()) {
     		return new ResponseEntity<>("no page size",HttpStatus.BAD_REQUEST);
     		
     	}
     	
-    	if(pageSize.isEmpty())
-    	{
-    		return new ResponseEntity<>("empty pagesize",HttpStatus.BAD_REQUEST);
+    	
+    	try {
+    		if(pageSize!=null) {
+    			
+    			Integer pagenum=Integer.parseInt(pageSize);
+    	    	 
+    			//return new ResponseEntity<>("page size ok",HttpStatus.OK);
+        	}
+			
+		} catch (Exception e) {
+			
+    		return new ResponseEntity<>(" pageSize this is not a number",HttpStatus.BAD_REQUEST);
+
+
+		}
+    	
+     	
+    	if(pageIndex==null || pageIndex.isEmpty()) {
+    		return new ResponseEntity<>("no page size",HttpStatus.BAD_REQUEST);
+    		
     	}
     	
     	
-    	Integer keynum=Integer.parseInt(keyword);
-    	Integer pagenum=Integer.parseInt(pageSize);
-    	 
-    	int[] array = Arrays.asList(pageIndex).stream().mapToInt(Integer::parseInt).toArray(); //convert String to integer array.
+    	try {
+    		if(pageIndex!=null) {
+    			
+    			Integer pIndex=Integer.parseInt(pageIndex);
+    	    	 
+    			//return new ResponseEntity<>("page size ok",HttpStatus.OK);
+        	}
+			
+		} catch (Exception e) {
+			
+    		return new ResponseEntity<>(" pageIndex this is not a number",HttpStatus.BAD_REQUEST);
+
+
+		}
+    	
+    	
+    	
+    	
     	
     	
     	
