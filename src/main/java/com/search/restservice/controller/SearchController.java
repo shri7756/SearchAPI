@@ -1,6 +1,7 @@
 package com.search.restservice.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,6 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.search.restservice.request.SearchRequest;
+import com.search.restservice.validator.SearchValidator;
+
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,20 +25,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 public class SearchController {
-	//TODO Add the Appropriate logger and Exceptions
-
-    /**
-     * This method returns the search-nav results
-     *
-     * @param searchRequest
-     * @param headers
-     * @return
-     * @throws ApiException
-     */
+	
+	@Autowired
+	SearchValidator searchValidator;
+	
+	
+	
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> doPageSearch(@ModelAttribute SearchRequest searchRequest, BindingResult reqValidate,
                                           @RequestHeader HttpHeaders headers, final HttpServletRequest request) {
-        //return doSearchWithMetrics(searchRequest, reqValidate, headers, request, null);
+    	
+    	
+    	searchRequest=searchValidator.validateSearchParams(request);
+		 
+		  
+    	
     	return new ResponseEntity<>("Well come to Basic Spring boot application", HttpStatus.OK); 
     }
 
